@@ -1,0 +1,7 @@
+.banner {
+  width: 80%; /* Điều chỉnh kích thước hình ảnh nếu cần */
+  height: 25em;
+  background-color: #fff;
+  object-fit: cover;
+  align-items: center;
+}

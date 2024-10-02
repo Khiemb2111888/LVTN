@@ -1,0 +1,104 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+/* header */
+header {
+  background-color: #fff;
+  color: #000;
+  padding: 0;
+  margin: 0;
+}
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+nav ul li a {
+  color: #000;
+  text-decoration: none;
+}
+
+main {
+  padding: 2em;
+}
+
+footer {
+  color: white;
+  text-align: center;
+  padding: 1em;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+.tabs {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Tab Links */
+.tab-links {
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.tab-button {
+  background-color: #ddd;
+  border: none;
+  outline: none;
+  padding: 14px 20px;
+  cursor: pointer;
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+
+.tab-button:hover {
+  background-color: #ccc;
+}
+
+.tab-button.active {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+}
+
+.product-item img {
+  max-width: 100%;
+  height: auto;
+}
