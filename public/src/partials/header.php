@@ -5,12 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang Web Của Tôi</title>
-  <link rel="stylesheet" href="../assets/css/product.css">
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="../assets/css/header.css">
-  <link rel="stylesheet" href="../assets/css/all.min.css">
-  <script src="../assets/js/all.min.js"></script>
-  <script src="../assets/js/script.js"></script>
+  <link rel="stylesheet" href="/public/assets/css/product.css">
+  <link rel="stylesheet" href="/public/assets/css/style.css">
+  <link rel="stylesheet" href="/public/assets/css/all.min.css">
+  <script src="/public/assets/js/all.min.js"></script>
+  <script src="/public/assets/js/script.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,7 +18,9 @@
 <body>
   <header>
     <?php
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
 
     use CT275\Labs\User;
     use CT275\Labs\Paginator;
@@ -54,13 +55,13 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <?php if (!isset($_SESSION['user_id'])): ?>
-                      <a class="dropdown-item" href="register.php">Đăng Ký</a>
-                      <a class="dropdown-item" href="login.php">Đăng Nhập</a>
+                      <a class="dropdown-item" href="/public/register.php">Đăng Ký</a>
+                      <a class="dropdown-item" href="/public/login.php">Đăng Nhập</a>
                     <?php else: ?>
                       <h6 class="dropdown-header">Xin chào, <?= htmlspecialchars($_SESSION['emailOrUsername']) ?>!</h6>
                       <a class="dropdown-item" href="profile.php">Thông Tin Tài Khoản</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="logout.php">Đăng Xuất</a>
+                      <a class="dropdown-item" href="/public/logout.php">Đăng Xuất</a>
                     <?php endif; ?>
                   </div>
                 </li>
@@ -75,26 +76,26 @@
             <div class="col-2"><i class="fa-solid fa-phone"></i>HOTLINE <br>123456789</div>
             <div class="col-3"><i class="fa-solid fa-truck-fast"></i>MIỄN PHÍ GIAO HÀNG <br> Tận nơi - Toàn Quốc</div>
             <div class="col-2"><i class="fa-solid fa-credit-card"></i>THANH TOÁN ONLINE</div>
-            <div class="col-2"><i class="fa-solid fa-cart-shopping mt-3"></i> <a href="../page/cart.php">Mở Giỏ Hàng</a></div>
+            <div class="col-2"><i class="fa-solid fa-cart-shopping mt-3"></i> <a href="/public/cart_view.php">Mở Giỏ Hàng</a></div>
           </div>
         </div>
       </div>
       <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
         <div class="container">
-          <a class="navbar-brand" href="index.php">Trang Chủ</a>
+          <a class="navbar-brand" href="product.php">Trang Chủ</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="mynavbar">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link" href="about.php">Giới Thiệu</a>
+                <a class="nav-link" href="/public/about.php">Giới Thiệu</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="services.php">Dịch Vụ</a>
+                <a class="nav-link" href="/public/services.php">Dịch Vụ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="../page/contact.php">Liên Hệ</a>
+                <a class="nav-link" href="/public/contact.php">Liên Hệ</a>
               </li>
             </ul>
           </div>
@@ -105,15 +106,15 @@
         </div>
       </nav>
       <div class="image-container  d-flex justify-content-center border border-0">
-        <img class="banner" id="image" src="../assets/img/banner4.jpg" alt="Image">
+        <img class="banner" id="image" src="/public/assets/img/banner4.jpg" alt="Image" style="width: 100%; height: 500px;">
       </div>
       <script>
         // Danh sách các hình ảnh để thay đổi
         const images = [
-          "../assets/img/banner1.jpg",
-          "../assets/img/banner2.jpg",
-          "../assets/img/banner3.jpg",
-          "../assets/img/banner4.jpg",
+          "/public/assets/img/banner1.jpg",
+          "/public/assets/img/banner2.jpg",
+          "/public/assets/img/banner3.jpg",
+          "/public/assets/img/banner4.jpg",
         ];
 
         let currentIndex = 0; // Chỉ số của hình ảnh hiện tại

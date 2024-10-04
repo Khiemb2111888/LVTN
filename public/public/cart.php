@@ -1,31 +1,26 @@
 <?php
-require_once '../includes/config.php'
-?>
+session_start();
 
-<body>
-    <?php require_once __DIR__ . '/../includes/header.php'; ?>
-    <div class="container mt-3">
-        <h2>Giỏ Hàng</h2>
-        <div id="cartItems">
-            <div class="cart">
-                <h2>Shopping Cart</h2>
-                <ul id="cart-items">
-                    <!-- Cart items will be added here -->
-                </ul>
-                <p>Total: $<span id="total-price">0.00</span></p>
-                <button id="checkout">Checkout</button>
-            </div>
+// Kiểm tra nếu có product_id được gửi
+if (isset($_POST['product_id'])) {
+    $productId = (int) $_POST['product_id'];
 
-        </div>
-        <button id="checkoutBtn">Thanh Toán</button>
-    </div>
-    </div>
-    <!-- <?php require_once __DIR__ . '/../includes/footder.php'; ?> -->
+    // Giả sử bạn có giỏ hàng lưu trong session
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../assets/js/product.js"></script>
-</body>
+    // Thêm sản phẩm vào giỏ hàng
+    if (!isset($_SESSION['cart'][$productId])) {
+        $_SESSION['cart'][$productId] = 1; // Số lượng mặc định là 1
+    } else {
+        $_SESSION['cart'][$productId]++; // Tăng số lượng sản phẩm nếu đã tồn tại trong giỏ
+    }
 
-</html>
+    // Chuyển hướng người dùng đến trang giỏ hàng
+    header('Location: product.php');
+    exit;
+}
+
+// Nếu không có product_id, chuyển hướng trở lại trang sản phẩm
+header('Location: product.php');

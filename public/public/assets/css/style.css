@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #000;
 }
 /* header */
 header {
@@ -36,10 +37,6 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-}
-/* General Styles */
-body {
-  font-family: Arial, sans-serif;
 }
 
 .tabs {
@@ -101,4 +98,43 @@ body {
 .product-item img {
   max-width: 100%;
   height: auto;
+}
+
+.product-card {
+  flex: 1 1 30%; /* 30% chiều rộng cho mỗi sản phẩm */
+  margin: 10px; /* Khoảng cách giữa các sản phẩm */
+  display: flex;
+  flex-direction: column; /* Để card có thể sử dụng chiều cao đều */
+  height: 100%; /* Để chiều cao của card bằng nhau */
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-price {
+  color: #f05a28;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 100%;
+  text-align: center;
+}
+.product-card {
+  height: 100%; /* Đảm bảo chiều cao của card đồng nhất */
+}
+
+.product-image {
+  height: 200px; /* Chiều cao hình ảnh */
+  object-fit: cover; /* Đảm bảo hình ảnh không bị cắt bớt */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Đẩy nút "Xem Chi Tiết" xuống dưới cùng */
 }

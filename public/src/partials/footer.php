@@ -9,7 +9,9 @@
             </ul>
         </nav>
     </div>
-    <script src="../assets/js/script.js"></script>
+    <script src="/public/assets/js/product.js"></script>
+    <script src="/public/assets/js/all.min.js"></script>
+    <script src="/public/assets/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

@@ -64,7 +64,7 @@ $pages = $paginator->getPages(length: 3);
                             <a href="<?= '/public/editUser.php?id=' . $User->id ?>" class="btn btn-xs btn-warning">
                                 <i alt="Edit" class="fa fa-pencil"></i> Edit
                             </a>
-                            <form class="ms-1" action="/delete.php" method="POST">
+                            <form class="ms-1" action="/public/deleteUser.php" method="POST">
                                 <input type="hidden" name="id" value="<?= $User->id ?>">
                                 <button type="submit" class="btn btn-xs btn-danger" name="delete-User">
                                     <i alt="Delete" class="fa fa-trash"></i> Delete
