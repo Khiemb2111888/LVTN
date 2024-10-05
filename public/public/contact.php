@@ -1,7 +1,8 @@
 <?php
-require_once '../includes/config.php'
+require_once __DIR__ . '/../src/bootstrap.php';
+require_once __DIR__ . '/../src/partials/header.php';
+
 ?>
-<?php require_once __DIR__ . '/../includes/header.php'; ?>
 <div class="row">
     <div class="col-9 mt-4">
         <h3>Liên hệ với chúng tôi!</h3>
@@ -37,7 +38,8 @@ require_once '../includes/config.php'
         </p>
     </div>
 </div>
-<?php require_once __DIR__ . '/../includes/footder.php'; ?>
+<?php require_once __DIR__ . '/../src/partials/footer.php';
+?>
 </div>
 </body>
 

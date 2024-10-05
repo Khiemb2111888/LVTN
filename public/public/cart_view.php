@@ -7,6 +7,7 @@ use CT275\Labs\Product;
 // Kiểm tra giỏ hàng có sản phẩm không
 if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
     echo "<p>Giỏ hàng của bạn trống.</p>";
+    header('Location: /public/product.php');
     exit;
 }
 
@@ -60,7 +61,7 @@ require_once __DIR__ . '/../src/partials/header.php';
                         <td><?= number_format($product->price, 0, ',', '.') ?> VND</td>
                         <td><?= number_format($product->totalPrice, 0, ',', '.') ?> VND</td>
                         <td>
-                            <a href="deleteSp.php?product_id=<?= $product->id ?>" class="btn btn-danger">Xóa</a>
+                            <a href="delete_cart.php?product_id=<?= $product->id ?>" class="btn btn-danger">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

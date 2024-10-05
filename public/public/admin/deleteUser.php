@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../src/bootstrap.php';
+require_once __DIR__ . '/../../src/bootstrap.php';
 
 use CT275\Labs\User;
 
@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
     }
 
     // Chuyển hướng về trang quản lý người dùng
-    redirect('/public/page/index.php');
+    redirect('/public/admin/manage_users.php');
 }
 
 // Nếu không có yêu cầu xóa, chuyển hướng về trang quản lý người dùng
-redirect('/public/page/index.php');
+redirect('/public/admin/manage_users.php');

@@ -59,7 +59,7 @@ class User
     // Hàm kiểm tra email đã tồn tại hay chưa
     public function emailExists(string $email): bool
     {
-        $statement = $this->db->prepare('SELECT COUNT(*) FROM Users WHERE email = :email');
+        $statement = $this->db->prepare('SELECT COUNT(*) FROM User WHERE email = :email');
         $statement->execute(['email' => $email]);
         return $statement->fetchColumn() > 0;
     }
@@ -67,7 +67,7 @@ class User
     public function all(): array
     {
         $User = [];
-        $statement = $this->db->prepare('SELECT * FROM Users');
+        $statement = $this->db->prepare('SELECT * FROM User');
         $statement->execute();
         while ($row = $statement->fetch()) {
             $contact = new User($this->db);
@@ -91,7 +91,7 @@ class User
 
     public function count(): int
     {
-        $statement = $this->db->prepare('SELECT COUNT(*) FROM Users');
+        $statement = $this->db->prepare('SELECT COUNT(*) FROM User');
         $statement->execute();
         return $statement->fetchColumn();
     }
@@ -99,7 +99,7 @@ class User
     public function paginate(int $offset = 0, int $limit = 10): array
     {
         $User = [];
-        $statement = $this->db->prepare('SELECT * FROM Users LIMIT :offset,:limit');
+        $statement = $this->db->prepare('SELECT * FROM User LIMIT :offset,:limit');
         $statement->bindValue(':offset', $offset, PDO::PARAM_INT);
         $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
         $statement->execute();
@@ -172,7 +172,7 @@ class User
 
     public function find(int $id): ?User
     {
-        $statement = $this->db->prepare('select * from Users where id = :id');
+        $statement = $this->db->prepare('select * from User where id = :id');
         $statement->execute(['id' => $id]);
         if ($row = $statement->fetch()) {
             $this->fillFromDbRow($row);
@@ -183,13 +183,13 @@ class User
 
     public function delete(): bool
     {
-        $statement = $this->db->prepare('delete from Users where id = :id');
+        $statement = $this->db->prepare('delete from User where id = :id');
         return $statement->execute(['id' => $this->id]);
     }
 
     public function findByEmailOrUsername($emailOrUsername)
     {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :emailOrUsername OR username = :emailOrUsername LIMIT 1");
+        $stmt = $this->db->prepare("SELECT * FROM user WHERE email = :emailOrUsername OR username = :emailOrUsername LIMIT 1");
         $stmt->execute([':emailOrUsername' => $emailOrUsername]);
         return $stmt->fetchObject();
     }

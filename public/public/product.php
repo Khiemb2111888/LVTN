@@ -62,7 +62,7 @@ require_once __DIR__ . '/../src/partials/header.php';
 
 
 <?php
-// require_once __DIR__ . '/../src/partials/footer.php';
+require_once __DIR__ . '/../src/partials/footer.php';
 ?>
 </body>
 

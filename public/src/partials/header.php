@@ -58,8 +58,8 @@
                       <a class="dropdown-item" href="/public/register.php">Đăng Ký</a>
                       <a class="dropdown-item" href="/public/login.php">Đăng Nhập</a>
                     <?php else: ?>
-                      <h6 class="dropdown-header">Xin chào, <?= htmlspecialchars($_SESSION['emailOrUsername']) ?>!</h6>
-                      <a class="dropdown-item" href="profile.php">Thông Tin Tài Khoản</a>
+                      <h6 class="dropdown-header">Xin chào, <?= htmlspecialchars($_SESSION['username'] ?? ''); ?>!</h6>
+                      <a class="dropdown-item" href="/profile.php">Thông Tin Tài Khoản</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="/public/logout.php">Đăng Xuất</a>
                     <?php endif; ?>
@@ -95,13 +95,15 @@
                 <a class="nav-link" href="/public/services.php">Dịch Vụ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/public/contact.php">Liên Hệ</a>
+                <a class="nav-link" href="/contact.php">Liên Hệ</a>
               </li>
             </ul>
           </div>
-          <form class="d-flex mb-0 ">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+          <form action="/public/search.php" method="GET" style="display: -webkit-inline-box;">
+            <div class="form-group">
+              <input type="text" name="keyword" class="form-control" placeholder="Nhập tên sản phẩm..." required>
+            </div>
+            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
           </form>
         </div>
       </nav>

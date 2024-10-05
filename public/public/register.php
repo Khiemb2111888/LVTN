@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-    $role = trim($_POST['role']);
+    $role = "customer";
 
     // Tạo một đối tượng User
     $user = new User($PDO);
@@ -45,8 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['error'] = implode("<br>", $errors);
     } else {
         // Mã hóa mật khẩu
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Thêm người dùng mới vào cơ sở dữ liệu
         $user->fill([
             'username' => $username,
@@ -57,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($user->save()) {
             $_SESSION['success'] = "Đăng ký thành công! Bạn có thể đăng nhập.";
-            header("Location: /public/index.php");
+            header("Location: /public/success.php");
             exit();
         } else {
             $_SESSION['error'] = "Có lỗi xảy ra. Vui lòng thử lại.";

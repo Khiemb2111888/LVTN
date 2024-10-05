@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../src/bootstrap.php';
 
 use CT275\Labs\User;
@@ -24,10 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Chuyển hướng theo vai trò
             if ($userRecord->role === 'admin') {
-                // Chuyển hướng đến trang admin nếu role là admin
-                header("Location: /public/admin.php");
+                header("Location: /public/admin/index.php");
             } elseif ($userRecord->role === 'customer') {
-                // Chuyển hướng đến trang index chung nếu không phải admin 
                 header("Location: /public/index.php");
             }
 
@@ -35,21 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Mật khẩu sai
             $_SESSION['error'] = "Tên đăng nhập hoặc mật khẩu không đúng.";
-            if ($userRecord) {
-                echo "User found: " . htmlspecialchars($userRecord->username); // In ra tên người dùng
-                echo "<br>Password Hash: " . htmlspecialchars($userRecord->password); // In ra hash mật khẩu
-                echo "<br>Password Hash: " . htmlspecialchars($password); // In ra hash mật khẩu
-                echo "<br>Password Hash: " . htmlspecialchars($emailOrUsername); // In ra hash mật khẩu
-            } else {
-                echo "No user found.";
-            }
         }
     } else {
         // Người dùng không tồn tại
         $_SESSION['error'] = "Người dùng không tồn tại.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <form action="" method="post">
         <label for="email_or_username">Tên đăng nhập hoặc Email:</label>
-        <input type="text" id="email_or_username" name="email_or_username" value="<?= isset($username) ? htmlspecialchars($username) : '' ?>" required>
+        <input type="text" id="email_or_username" name="email_or_username" value="<?= isset($emailOrUsername) ? htmlspecialchars($emailOrUsername) : '' ?>" required>
         <br><br>
 
         <label for="password">Mật khẩu:</label>

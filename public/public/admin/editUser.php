@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../src/bootstrap.php';
+require_once __DIR__ . '/../../src/bootstrap.php';
 
 use CT275\Labs\User;
 
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($userToEdit->save()) {
         $_SESSION['success'] = "Thông tin người dùng đã được cập nhật.";
         // Chuyển hướng về trang quản lý sau khi chỉnh sửa
-        redirect('/public/admin.php');
+        redirect('/public/admin/manage_users.php');
     } else {
         $_SESSION['error'] = "Cập nhật thông tin thất bại. Vui lòng thử lại.";
     }

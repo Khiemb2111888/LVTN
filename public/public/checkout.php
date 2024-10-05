@@ -2,6 +2,7 @@
 session_start();
 require_once __DIR__ . '/../src/bootstrap.php';
 
+use CT275\Labs\Order;
 use CT275\Labs\Product;
 
 // Kiểm tra giỏ hàng có sản phẩm không
@@ -12,6 +13,7 @@ if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
 
 // Tạo đối tượng Product để lấy thông tin sản phẩm
 $product = new Product($PDO);
+$order = new Order($PDO);
 
 // Lấy chi tiết các sản phẩm trong giỏ hàng
 $cartProducts = [];
@@ -64,11 +66,7 @@ require_once __DIR__ . '/../src/partials/header.php';
         <form action="process_payment.php" method="POST">
             <div class="form-group">
                 <label for="name">Họ và tên:</label>
-                <input type="text" name="name" id="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+                <input type="text" name="name_customer" id="name" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="address">Địa chỉ giao hàng:</label>
