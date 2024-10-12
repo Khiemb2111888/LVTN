@@ -46,7 +46,7 @@ $products = $product->getAllProducts(); // Giả sử phương thức này tồn
                         <td><?= htmlspecialchars($prod->quantity) ?></td>
                         <td><?= htmlspecialchars($prod->category_id) ?></td> <!-- Giả sử bạn đã có phương thức để lấy tên danh mục -->
                         <td><?= htmlspecialchars($prod->description) ?></td>
-                        <td><img src="/uploads/<?= htmlspecialchars($prod->image) ?>" alt="<?= htmlspecialchars($prod->name) ?>" style="width: 100px;"></td>
+                        <td><img src="<?= htmlspecialchars($prod->image) ?>" alt="<?= htmlspecialchars($prod->name) ?>" style="width: 100px;"></td>
                         <td>
                             <a href="edit_product.php?id=<?= htmlspecialchars($prod->id) ?>" class="btn btn-warning btn-sm">Sửa</a>
                             <a href="/public/admin/delete_product.php?id=<?= htmlspecialchars($prod->id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">Xóa</a>

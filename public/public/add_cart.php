@@ -1,7 +1,7 @@
 <?php
 session_start(); // Bắt đầu session
 require_once __DIR__ . '/../src/bootstrap.php'; // Nạp các tệp cần thiết
-
+use CT275\Labs\Product;
 // Kiểm tra nếu form đã gửi
 if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
     $productId = $_POST['product_id'];
@@ -18,10 +18,18 @@ if (isset($_POST['product_id']) && isset($_POST['quantity'])) {
         $_SESSION['cart'][$productId]['quantity'] += $quantity;
     } else {
         // Nếu chưa có, thêm sản phẩm mới vào giỏ hàng
-        $_SESSION['cart'][$productId] = [
-            'id' => $productId,
-            'quantity' => $quantity
-        ];
+        $product = new Product($PDO); // Tạo đối tượng Product
+        $productDetails = $product->getProductById($productId); // Lấy thông tin sản phẩm từ CSDL
+
+        if ($productDetails) {
+            // Thêm sản phẩm mới vào giỏ hàng
+            $_SESSION['cart'][$productId] = [
+                'id' => $productId,
+                'name' => $productDetails->name, // Lưu tên sản phẩm
+                'price' => $productDetails->price, // Lưu giá sản phẩm
+                'quantity' => $quantity
+            ];
+        }
     }
 
     // Chuyển hướng lại trang chi tiết hoặc giỏ hàng

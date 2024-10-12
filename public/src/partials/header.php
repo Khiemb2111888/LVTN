@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trang Web Của Tôi</title>
-  <link rel="stylesheet" href="/public/assets/css/product.css">
   <link rel="stylesheet" href="/public/assets/css/style.css">
   <link rel="stylesheet" href="/public/assets/css/all.min.css">
   <script src="/public/assets/js/all.min.js"></script>
@@ -39,100 +38,74 @@
     $pages = $paginator->getPages(length: 3);
 
     ?>
-    <div class="">
-      <div class="logo my-3">
-        <div class="container text-center">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Thời Trang</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tài Khoản
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <?php if (!isset($_SESSION['user_id'])): ?>
-                      <a class="dropdown-item" href="/public/register.php">Đăng Ký</a>
-                      <a class="dropdown-item" href="/public/login.php">Đăng Nhập</a>
-                    <?php else: ?>
-                      <h6 class="dropdown-header">Xin chào, <?= htmlspecialchars($_SESSION['username'] ?? ''); ?>!</h6>
-                      <a class="dropdown-item" href="/profile.php">Thông Tin Tài Khoản</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/public/logout.php">Đăng Xuất</a>
-                    <?php endif; ?>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </nav>
 
-          <div class="row">
-            <div class="col-3">
-              <h2>Fashion Store</h2>
-            </div>
-            <div class="col-2"><i class="fa-solid fa-phone"></i>HOTLINE <br>123456789</div>
-            <div class="col-3"><i class="fa-solid fa-truck-fast"></i>MIỄN PHÍ GIAO HÀNG <br> Tận nơi - Toàn Quốc</div>
-            <div class="col-2"><i class="fa-solid fa-credit-card"></i>THANH TOÁN ONLINE</div>
-            <div class="col-2"><i class="fa-solid fa-cart-shopping mt-3"></i> <a href="/public/cart_view.php">Mở Giỏ Hàng</a></div>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 d-flex align-items-center justify-content-start">
+          <a class="navbar-brand" href="#">Computer</a>
         </div>
-      </div>
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
-        <div class="container">
-          <a class="navbar-brand" href="product.php">Trang Chủ</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="/public/about.php">Giới Thiệu</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/public/services.php">Dịch Vụ</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contact.php">Liên Hệ</a>
-              </li>
-            </ul>
-          </div>
-          <form action="/public/search.php" method="GET" style="display: -webkit-inline-box;">
-            <div class="form-group">
-              <input type="text" name="keyword" class="form-control" placeholder="Nhập tên sản phẩm..." required>
-            </div>
-            <button type="submit" class="btn btn-primary">Tìm Kiếm</button>
+        <div class="col-md-6 d-flex justify-content-center">
+          <form id="searchForm" action="/public/search.php" method="GET" class="form-inline d-flex w-100 position-relative">
+            <input type="text" name="keyword" class="form-control w-100" placeholder="Nhập tên sản phẩm..." required>
+            <span class="position-absolute search-icon" style="right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+              <i class="fa fa-search"></i>
+            </span>
           </form>
         </div>
-      </nav>
-      <div class="image-container  d-flex justify-content-center border border-0">
-        <img class="banner" id="image" src="/public/assets/img/banner4.jpg" alt="Image" style="width: 100%; height: 500px;">
+        <script>
+          document.querySelector('.search-icon').addEventListener('click', function() {
+            document.getElementById('searchForm').submit();
+          });
+        </script>
+        <div class="col-md-3 d-flex align-items-center justify-content-end">
+          <a href="/public/cart_view.php" class="text-dark d-flex align-items-center">
+            <i class="fa-solid fa-cart-shopping fa-2x mr-2"></i>
+            <span>Mở Giỏ Hàng</span>
+          </a>
+        </div>
       </div>
-      <script>
-        // Danh sách các hình ảnh để thay đổi
-        const images = [
-          "/public/assets/img/banner1.jpg",
-          "/public/assets/img/banner2.jpg",
-          "/public/assets/img/banner3.jpg",
-          "/public/assets/img/banner4.jpg",
-        ];
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark ">
+      <div class="container">
+        <a class="navbar-brand" href="product.php">Trang Chủ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/public/about.php">Giới Thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/public/services.php">Dịch Vụ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/public/contact.php">Liên Hệ</a>
+            </li>
+          </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tài Khoản
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <?php if (!isset($_SESSION['user_id'])): ?>
+                  <a class="dropdown-item" href="/public/register.php">Đăng Ký</a>
+                  <a class="dropdown-item" href="/public/login.php">Đăng Nhập</a>
+                <?php else: ?>
+                  <h6 class="dropdown-header">Xin chào, <?= htmlspecialchars($_SESSION['username'] ?? ''); ?>!</h6>
+                  <a class="dropdown-item" href="/profile.php">Thông Tin Tài Khoản</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="/public/logout.php">Đăng Xuất</a>
+                <?php endif; ?>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-        let currentIndex = 0; // Chỉ số của hình ảnh hiện tại
-
-        const imageElement = document.getElementById("image");
-
-        function changeImage() {
-          currentIndex = (currentIndex + 1) % images.length; // Cập nhật chỉ số hình ảnh
-          imageElement.src = images[currentIndex]; // Thay đổi nguồn hình ảnh
-        }
-
-        // Thay đổi hình ảnh ngay khi tải trang
-        changeImage();
-
-        // Thay đổi hình ảnh mỗi 3 giây
-        setInterval(changeImage, 5000);
-      </script>
 
   </header>

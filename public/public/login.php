@@ -6,15 +6,19 @@ use CT275\Labs\User;
 
 // Xử lý khi biểu mẫu được gửi
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $emailOrUsername = trim($_POST['email_or_username']);
-    $password = trim($_POST['password']);
+    $emailOrUsername = $_POST['email_or_username'];
+    $password = $_POST['password'];
 
     // Tạo đối tượng User
     $user = new User($PDO);
 
     // Tìm kiếm người dùng
     $userRecord = $user->findByEmailOrUsername($emailOrUsername);
-
+    if (password_verify($password, $userRecord->password)) {
+        echo 'MK true';
+    } else {
+        echo 'mk sai';
+    }
     // Nếu tìm thấy người dùng
     if ($userRecord) {
         // Kiểm tra mật khẩu
@@ -27,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($userRecord->role === 'admin') {
                 header("Location: /public/admin/index.php");
             } elseif ($userRecord->role === 'customer') {
-                header("Location: /public/index.php");
+                header("Location: /public/product.php");
             }
 
             exit();

@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../src/bootstrap.php'; // Nạp tệp kết nối CSDL và các phần khác
+require_once __DIR__ . '/../src/bootstrap.php';
+
 use CT275\Labs\Product;
 
 $keyword = ''; // Từ khóa tìm kiếm

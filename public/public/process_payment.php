@@ -3,34 +3,49 @@ session_start();
 require_once __DIR__ . '/../src/bootstrap.php';
 
 use CT275\Labs\Order;
+use CT275\Labs\OrderItem;
 
-// Kiểm tra nếu giỏ hàng trống
-if (empty($_SESSION['cart'])) {
-    header("Location: /public/payment.php");
-    exit();
+// Kiểm tra giỏ hàng có sản phẩm không
+if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+    echo "<p>Giỏ hàng của bạn trống. Vui lòng thêm sản phẩm trước khi thanh toán.</p>";
+    header('Location: cart_view.php');
+    exit;
 }
 
-// Tạo đối tượng Order
-$order = new Order($PDO);
+// Lấy dữ liệu từ form thanh toán
+if (isset($_POST['name_customer'], $_POST['address'])) {
+    $nameCustomer = $_POST['name_customer'];
+    $address = $_POST['address'];
 
-// Thu thập thông tin từ form thanh toán
-$name_customer = $_POST['name_customer'];
-$address = $_POST['address'];
-$total_price = 0;
+    // Tính tổng tiền
+    $totalPrice = 0;
+    foreach ($_SESSION['cart'] as $item) {
+        $totalPrice += $item['price'] * $item['quantity'];
+    }
 
-// Tính tổng giá trị đơn hàng
-foreach ($_SESSION['cart'] as $productId => $item) {
-    $total_price += $item['price'] * $item['quantity']; // Đảm bảo bạn đã lưu 'price' khi thêm vào giỏ hàng
-}
+    // Tạo đối tượng Order
+    $order = new Order($PDO);
 
-// Thêm đơn hàng vào cơ sở dữ liệu
-$orderCreated = $order->create($name_customer, $productId, $address, $total_price, 'pending'); // 'pending' là trạng thái ban đầu
+    // Lưu thông tin đơn hàng vào bảng orders
+    if ($order->create($nameCustomer, $address, $totalPrice, 'pending')) {
+        $orderId = $PDO->lastInsertId(); // Lấy ID của đơn hàng vừa tạo
 
-if ($orderCreated) {
-    // Xóa giỏ hàng sau khi thanh toán thành công
-    unset($_SESSION['cart']);
-    header("Location: /public/success.php"); // Chuyển hướng đến trang thành công
-    exit();
+        // Lưu chi tiết sản phẩm vào bảng order_items
+        foreach ($_SESSION['cart'] as $productId => $item) {
+            $orderItem = new OrderItem($PDO);
+            $orderItem->create($orderId, $productId, $item['quantity'], $item['price']);
+        }
+
+        // Xóa giỏ hàng sau khi xử lý
+        unset($_SESSION['cart']);
+
+        header('Location: success.php');
+        exit;
+    } else {
+        echo "<p>Đã xảy ra lỗi khi tạo đơn hàng. Vui lòng thử lại.</p>";
+    }
 } else {
-    echo "Đã có lỗi xảy ra khi tạo đơn hàng.";
+    echo "<p>Vui lòng điền đầy đủ thông tin thanh toán.</p>";
+    header('Location: checkout.php');
+    exit;
 }

@@ -44,13 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($errors)) {
         $_SESSION['error'] = implode("<br>", $errors);
     } else {
-        // Mã hóa mật khẩu
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Thêm người dùng mới vào cơ sở dữ liệu
         $user->fill([
             'username' => $username,
             'email' => $email,
-            'password' => $hashed_password,
+            'password' => $password,
             'role' => $role,
         ]);
 

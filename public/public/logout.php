@@ -22,5 +22,5 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // Chuyển hướng về trang chính hoặc trang đăng nhập
-header("Location: /public/index.php");
+header("Location: /public/product.php");
 exit();

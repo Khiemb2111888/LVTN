@@ -23,13 +23,13 @@ require_once __DIR__ . '/../src/partials/header.php';
 
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <img src="<?= htmlspecialchars($productDetails->image) ?>" alt="<?= htmlspecialchars($productDetails->name) ?>" class="img-fluid">
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
             <h2><?= htmlspecialchars($productDetails->name) ?></h2>
-            <p>Giá: <?= number_format($productDetails->price, 0, ',', '.') ?> VND</p>
             <p><?= htmlspecialchars($productDetails->description) ?></p>
+            <p>Giá: <?= number_format($productDetails->price, 0, ',', '.') ?> VND</p>
 
             <!-- Form thêm vào giỏ hàng -->
             <form action="/public/add_cart.php" method="POST">
